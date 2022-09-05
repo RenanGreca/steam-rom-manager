@@ -170,6 +170,7 @@ export class VDF_Manager {
                 icon_path = path.join(listItem.screenshots.gridDir, `${ids.shortenAppId(appId).concat('_icon')}.${icon_ext}`);
               }
 
+              console.log(app);
               if (item !== undefined) {
                 item.appid = ids.generateShortcutId(app.executableLocation, app.title),
                   item.appname = app.title;

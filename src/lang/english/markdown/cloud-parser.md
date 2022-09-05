@@ -22,16 +22,16 @@ Thus, a JSON file should be in this format:
 
 ```
 {
-    games: [
+    "games": [
         {
-            DisplayName: "Halo Infinite",
-            AppCode: "halo-infinite-campaign",
-            ID: "9NP1P1WFS0LB"
+            "DisplayName": "Halo Infinite",
+            "AppCode": "halo-infinite-campaign",
+            "ID": "9NP1P1WFS0LB"
         },
         {
-            DisplayName: "Forza Horizon 5",
-            AppCode: "forza-horizon-5-standard-edition",
-            ID: "9NKX70BBCDRN"
+            "DisplayName": "Forza Horizon 5",
+            "AppCode": "forza-horizon-5-standard-edition",
+            "ID": "9NKX70BBCDRN"
         }
     ]
 }

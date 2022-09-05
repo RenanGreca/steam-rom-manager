@@ -2,7 +2,7 @@
 	"Xbox Cloud Gaming": {
 		"parserType": "Xbox Cloud Gaming",
 		"configTitle": "Xbox Cloud Gaming",
-		"steamCategory": "${xCloud}",
+		"steamCategory": "${Xbox Cloud Gaming}",
 		"executableModifier": "\"${exePath}\"",
 		"romDirectory": "path-to-roms",
 		"steamDirectory": "${steamdirglobal}",
@@ -48,7 +48,7 @@
 			"removeBrackets": true
 		},
 		"executable": {
-			"path": "path-to-xemu.exe",
+			"path": "",
 			"shortcutPassthrough": false,
 			"appendArgsToExecutable": true
 		},

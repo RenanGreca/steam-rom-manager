@@ -204,15 +204,16 @@ export const EnglishLang: languageContainer = {
       inputTitle: 'Cloud',
       jsonInputTitle: 'JSON File',
       browserInputTitle: 'Web Browser (default: MS Edge)',
+      labelAsCloudTitle: 'Label entries with "Xbox Cloud Gaming"?',
       // launcherModeInputTitle: ""
       docs__md: {
         self: [
-          require('./markdown/glob-parser.md'),
+          require('./markdown/cloud-parser.md'),
           // require('./markdown/what-is-glob.md'),
           // require('./markdown/spec-glob-chars.md'),
         ],
         input: [
-          require('./markdown/glob-parser-input.md'),
+          require('./markdown/cloud-parser-input.md'),
           // require('./markdown/spec-glob-chars.md')
         ]
       },

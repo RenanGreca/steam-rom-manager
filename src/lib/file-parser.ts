@@ -234,19 +234,21 @@ export class FileParser {
     })
   }
   private parsedConfigFilesPromise({superType, config, settings, data, parsedConfig}: {superType: string, config: UserConfiguration, settings: AppSettings, data: ParsedDataWithFuzzy, parsedConfig: ParsedUserConfiguration}) {
+    console.log('parsedConfigFilesPromise');
     return new Promise((resolve, reject) => {
       try {
         let vParser = new VariableParser({ left: '${', right: '}' });
+        console.log(config);
         let launcherMode = !!(
           config.parserInputs.epicLauncherMode
           || config.parserInputs.gogLauncherMode
           || config.parserInputs.amazonGamesLauncherMode
           || config.parserInputs.uplayLauncherMode
-          || config.parserInputs.xCloudLauncherMode
+          || (config.parserType == "Xbox Cloud Gaming")
         );
         for(let j=0; j < data.success.length; j++) {
           let fuzzyTitle = data.success[j].fuzzyTitle || data.success[j].extractedTitle;
-
+          console.log(data.success[j]);
           // Fail empty titles
           if (fuzzyTitle.length === 0) {
             parsedConfig.failed.push(data.success[j].filePath);
@@ -317,7 +319,7 @@ export class FileParser {
           }) : '';
 
           variableData.finalTitle = newFile.finalTitle;
-
+          console.log(newFile.argumentString);
           if (superType === parserInfo.ManualType) {
             newFile.argumentString = data.success[j].launchOptions || '';
           }
@@ -332,6 +334,7 @@ export class FileParser {
           else if (superType === parserInfo.ArtworkOnlyType) {
             newFile.argumentString = '';
           }
+          console.log(newFile.argumentString);
           newFile.modifiedExecutableLocation = vParser.setInput(config.executableModifier).parse() ? vParser.replaceVariables((variable) => {
             return this.getVariable(variable as AllVariables, variableData).trim();
           }) : '';
@@ -345,6 +348,7 @@ export class FileParser {
             return this.getVariable(variable as AllVariables, variableData);
           })) : [];
 
+          console.log(newFile.argumentString);
           parsedConfig.files.push(newFile);
         }
         resolve({superType: superType, config: config, settings: settings, parsedConfig: parsedConfig})
@@ -445,7 +449,9 @@ export class FileParser {
         for(let j=0; j< parsedConfig.files.length; j++) {
           if(config.executable.appendArgsToExecutable) {
             parsedConfig.files[j].modifiedExecutableLocation = `${parsedConfig.files[j].modifiedExecutableLocation} ${parsedConfig.files[j].argumentString}`;
-            parsedConfig.files[j].argumentString = '';
+            if (config.parserType !== "Xbox Cloud Gaming") {
+              parsedConfig.files[j].argumentString = '';
+            }
           }
           parsedConfig.files[j].modifiedExecutableLocation = parsedConfig.files[j].modifiedExecutableLocation.trim();
         }

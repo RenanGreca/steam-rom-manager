@@ -26,12 +26,19 @@ export class CloudParser implements GenericParser {
           validationFn: null,
           info: this.lang.docs__md.input.join('')
         },
-        'browser': {
-          label: this.lang.browserInputTitle,
-          inputType: 'path',
+        'labelAsCloud': {
+          label: this.lang.labelAsCloudTitle,
+          inputType: 'toggle',
           validationFn: null,
           info: this.lang.docs__md.input.join('')
         }
+        //,
+        // 'browser': {
+        //   label: this.lang.browserInputTitle,
+        //   inputType: 'text',
+        //   validationFn: null,
+        //   info: this.lang.docs__md.input.join('')
+        // }
         // 'xCloudLauncherMode': {
         //   label: this.lang.launcherModeInputTitle,
         //   inputType: 'toggle',
@@ -50,35 +57,44 @@ export class CloudParser implements GenericParser {
       let appIDs: string[] = [];
       let jsonFile: string = "";
       let browserPath: string = "";
+      let labelAsCloud: boolean = inputs.labelAsCloud;
+
       if(inputs.jsonFile) {
         jsonFile = inputs.jsonFile;
       }
 
-      if (inputs.browser) {
-        browserPath = inputs.browser;
-      } else {
+      // if (inputs.browser) {
+      //   browserPath = inputs.browser;
+      // } else {
         // TODO insert Microsoft Edge location
         if(os.type()=='Windows_NT') {
-          // epicManifestsDir = 'C:\\ProgramData\\Epic\\EpicGamesLauncher\\Data\\Manifests';
+          browserPath = 'MICROSOFT EDGE PATH?'
         } else if(os.type()=='Linux') {
           browserPath = 'MICROSOFT EDGE PATH?'
         } else if( os.type()=='Darwin' ) {
           browserPath = '/Applications/Microsoft Edge.app';
         }
-      }
+      // }
+
+      browserPath = '/Applications/Microsoft Edge.app';
 
       if(!fs.existsSync(jsonFile)) {
         reject(this.lang.errors.fileNotFound__md)
       }
       if(!fs.existsSync(browserPath)) {
-        reject(this.lang.errors.fileNotFound__md)
+        reject(this.lang.errors.browserNotFound__md)
       }
       let item = JSON.parse(fs.readFileSync(jsonFile).toString())
       if (!isArray(item.games)) {
         reject(this.lang.errors.incorrectFormat__md)
       }
       item.games.forEach((element: { DisplayName: string; AppCode: string; ID: string; }) => {
-        appTitles.push(element.DisplayName)
+        let displayName = element.DisplayName
+        if (labelAsCloud) {
+          displayName += " (Xbox Cloud Gaming)"
+        }
+        
+        appTitles.push(displayName)
         appCodes.push(element.AppCode)
         appIDs.push(element.ID)
         
@@ -97,8 +113,9 @@ export class CloudParser implements GenericParser {
         parsedData.success.push({
           extractedTitle: appTitles[i],
           extractedAppId: appIDs[i],
-          launchOptions: `--window-size=1024,640 --force-device-scale-factor=1.25 --device-scale-factor=1.25 --kiosk "https://www.xbox.com/play/launch/${appTitles[i]}/${appIDs[i]}"`,
-          // filePath: parsedData.executableLocation;
+          launchOptions: `--window-size=1024,640 --force-device-scale-factor=1.25 --device-scale-factor=1.25 --kiosk "https://www.xbox.com/play/launch/${appCodes[i]}/${appIDs[i]}"`,
+          filePath: parsedData.executableLocation,
+          // finalTitle: appTitles[i] + " (xCloud)"
         });
       }
       resolve(parsedData);

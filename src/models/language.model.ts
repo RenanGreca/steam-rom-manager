@@ -167,6 +167,7 @@ export interface languageStruct {
       inputTitle: string,
       jsonInputTitle: string,
       browserInputTitle: string,
+      labelAsCloudTitle: string,
       docs__md: {
         self: string[],
           input: string[]
