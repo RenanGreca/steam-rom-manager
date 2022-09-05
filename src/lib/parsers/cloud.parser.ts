@@ -70,13 +70,13 @@ export class CloudParser implements GenericParser {
         if(os.type()=='Windows_NT') {
           browserPath = 'MICROSOFT EDGE PATH?'
         } else if(os.type()=='Linux') {
-          browserPath = 'usr/bin/flatpak'
+          browserPath = '/usr/bin/flatpak'
         } else if( os.type()=='Darwin' ) {
           browserPath = '/Applications/Microsoft Edge.app';
         }
       // }
 
-      browserPath = '/Applications/Microsoft Edge.app';
+      // browserPath = '/Applications/Microsoft Edge.app';
 
       if(!fs.existsSync(jsonFile)) {
         reject(this.lang.errors.fileNotFound__md)
