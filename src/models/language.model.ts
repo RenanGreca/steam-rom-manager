@@ -163,6 +163,32 @@ export interface languageStruct {
         fatalError__i: string
       }
     },
+    cloudParser: {
+      inputTitle: string,
+      jsonInputTitle: string,
+      browserInputTitle: string,
+      docs__md: {
+        self: string[],
+          input: string[]
+      },
+      errors: {
+        fileNotFound__md: string,
+        incorrectFormat__md: string,
+        browserNotFound__md: string,
+        noTitle__md: string,
+        moreThanOneTitle__md: string,
+        noStarNextToTitle__md: string,
+        noAnyCharNextToTitle__md: string,
+        noWindowsSlash__md: string,
+        noGlobstarOnBothSides__md: string,
+        noBracedDirSetOnBothSides__md: string,
+        noBracedDirSetOrGlobstarOnBothSides__md: string,
+        noEmptyPattern__md: string,
+        noEmptyCharRange__md: string,
+        noStarInPatternNextToTitle__md: string,
+        noAnyCharInPatternNextToTitle__md: string
+      }
+    },
     globParser: {
       inputTitle: string,
         docs__md: {

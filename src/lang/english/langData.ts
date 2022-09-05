@@ -200,6 +200,40 @@ export const EnglishLang: languageContainer = {
         databaseNotFound: "> itch.io database file not found. Itch is most likely not installed."
       }
     },
+    cloudParser: {
+      inputTitle: 'Cloud',
+      jsonInputTitle: 'JSON File',
+      browserInputTitle: 'Web Browser (default: MS Edge)',
+      // launcherModeInputTitle: ""
+      docs__md: {
+        self: [
+          require('./markdown/glob-parser.md'),
+          // require('./markdown/what-is-glob.md'),
+          // require('./markdown/spec-glob-chars.md'),
+        ],
+        input: [
+          require('./markdown/glob-parser-input.md'),
+          // require('./markdown/spec-glob-chars.md')
+        ]
+      },
+      errors: {
+        fileNotFound__md: '> JSON file not found: `${jsonFile}`',
+        browserNotFound__md: '> Browser executable not found: `${browserPath}`',
+        incorrectFormat__md: '> JSON file not in the correct format.',
+        noTitle__md: '> File glob must contain `${title}`!',
+        moreThanOneTitle__md: '> File glob must contain only one `${title}`!',
+        noStarNextToTitle__md: '> Star `*` can not be next to `${title}`!',
+        noAnyCharNextToTitle__md: '> Any char `?` can not be next to `${title}`!',
+        noWindowsSlash__md: '> Windows directory character `\\` is not allowed! Use `/` instead.',
+        noGlobstarOnBothSides__md: '> Globstar `**` can only be on one side of `${title}`!',
+        noBracedDirSetOnBothSides__md: '> A braced set, containing at least one slash `/` can only be on one side of `${title}`!',
+        noBracedDirSetOrGlobstarOnBothSides__md: '> A braced set, containing at least one slash `/` and a globstar `**` can only be on one side of `${title}`!',
+        noEmptyPattern__md: '> Pattern can not be empty!',
+        noEmptyCharRange__md: '> Character range can not be empty!',
+        noStarInPatternNextToTitle__md: '> Star `*`, inside a pattern, can not be next to `${title}`!',
+        noAnyCharInPatternNextToTitle__md: '> Any char `?`, inside a pattern, can not be next to `${title}`!'
+      }
+    },
     globParser: {
       inputTitle: 'User\'s glob',
       docs__md: {
