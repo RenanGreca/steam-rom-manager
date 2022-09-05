@@ -70,7 +70,7 @@ export class CloudParser implements GenericParser {
         if(os.type()=='Windows_NT') {
           browserPath = 'MICROSOFT EDGE PATH?'
         } else if(os.type()=='Linux') {
-          browserPath = 'MICROSOFT EDGE PATH?'
+          browserPath = 'usr/bin/flatpak'
         } else if( os.type()=='Darwin' ) {
           browserPath = '/Applications/Microsoft Edge.app';
         }
@@ -113,7 +113,7 @@ export class CloudParser implements GenericParser {
         parsedData.success.push({
           extractedTitle: appTitles[i],
           extractedAppId: appIDs[i],
-          launchOptions: `--window-size=1024,640 --force-device-scale-factor=1.25 --device-scale-factor=1.25 --kiosk "https://www.xbox.com/play/launch/${appCodes[i]}/${appIDs[i]}"`,
+          launchOptions: `run --branch=stable --arch=x86_64 --command=/app/bin/edge --file-forwarding com.microsoft.Edge @@u @@ --window-size=1024,640 --force-device-scale-factor=1.25 --device-scale-factor=1.25 --kiosk "https://www.xbox.com/play/launch/${appCodes[i]}/${appIDs[i]}"`,
           filePath: parsedData.executableLocation,
           // finalTitle: appTitles[i] + " (xCloud)"
         });
